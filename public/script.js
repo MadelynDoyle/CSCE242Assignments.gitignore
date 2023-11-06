@@ -1,52 +1,60 @@
-const showBooks = async() => {
-    const booksJSON = await getBooks();
-    const bookDiv = document.getElementById("book-container");
-
-    if (booksJSON == "") {
-        console.log("Invalid load of json");
-        return;
-    }
-    booksJSON.forEach((book) => {
-        const bookDiv = document.getElementById('book-container');
-        const section = document.createElement("section");
-        bookDiv.append(section);
-
-        const h3 = document.createElement("h3");
-        h3.innerHTML = book.title;
-        section.append(h3);
-
-        const img = document.createElement("img");
-        img.src = book.img;
-        section.append(img);
-
-        const author = document.createElement("author");
-        author.innerHTML = book.author;
-        section.append(author);
-
-        const genre = document.createElement("genre");
-        genre.innerHTML = book.genre;
-        section.append(genre);
-
-        const rating = document.createElement("rating");
-        rating.innerHTML = book.rating;
-        section.append(rating);
-
-        const para = document.createElement("para");
-        para.innerHTML = book.author;
-        section.append(para);
-
-        const characters = document.createElement("characters");
-        characters.textContent = `Main Characters: ${book.maincharacters.join(', ')}`;
-        section.append(characters);
-
-    });
-}
-const getBooks = async() => {
+const showBooks = async () => {
     try {
-        return (await fetch("/api/books")).json();
+        const booksJSON = await getBooks();
+        const bookDiv = document.getElementById("bookContainer");
+
+        if (booksJSON && booksJSON.length > 0) {
+            booksJSON.forEach((book) => {
+                const section = document.createElement("div");
+                section.classList.add("book");
+
+                const img = document.createElement("img");
+                img.src = book.img;
+                img.classList.add("book-image");
+                section.appendChild(img);
+
+                const bookInfo = document.createElement("div");
+                bookInfo.classList.add("book-info");
+                section.appendChild(bookInfo);
+
+                const h2 = document.createElement("h2");
+                h2.textContent = book.title;
+                bookInfo.appendChild(h2);
+
+                const author = document.createElement("p");
+                author.textContent = `Author: ${book.author}`;
+                bookInfo.appendChild(author);
+
+                const genre = document.createElement("p");
+                genre.textContent = `Genre: ${book.genre}`;
+                bookInfo.appendChild(genre);
+
+                const rating = document.createElement("p");
+                rating.textContent = `Rating: ${book.rating}`;
+                bookInfo.appendChild(rating);
+
+                const characters = document.createElement("p");
+                characters.textContent = `Main Characters: ${book.maincharacters.join(', ')}`;
+                bookInfo.appendChild(characters);
+
+                bookDiv.appendChild(section);
+            });
+        } else {
+            console.log("No books found");
+        }
     } catch (error) {
-        console.log("error retrieving json");
-        return "";
+        console.log("Error retrieving or displaying books:", error);
     }
-}
-window.onload = () => showBooks();
+};
+
+const getBooks = async () => {
+    try {
+        const response = await fetch("http://localhost:3000/api/books");
+        return response.json();
+    } catch (error) {
+        console.log("Error retrieving JSON:", error);
+        return [];
+    }
+};
+
+window.onload = showBooks;
