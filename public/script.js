@@ -42,7 +42,7 @@ const showBooks = async() => {
 }
 const getBooks = async() => {
     try {
-        return (await fetch("https://csce242-assignments.onrender.com")).json();
+        return (await fetch("/api/books")).json();
     } catch (error) {
         console.log("error retrieving json");
         return "";
