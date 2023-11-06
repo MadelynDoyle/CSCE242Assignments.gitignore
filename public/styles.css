@@ -1,12 +1,45 @@
-h1{
-    color:crimson;
-    text-align: center;
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
 }
-body{
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: blanchedalmond;
+
+.book-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    max-width: 1200px;
 }
-#books-div{
-    display:flex;
-    flex-direction: column;
+
+.book {
+    display: flex;
+    background-color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    width: 400px;
+}
+
+.book-image {
+    width: 150px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.book-info {
+    padding: 20px;
+}
+
+h2 {
+    margin: 0 0 10px 0;
+}
+
+p {
+    margin: 5px 0;
 }
