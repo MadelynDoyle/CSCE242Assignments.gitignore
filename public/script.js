@@ -1,16 +1,3 @@
-const express = require("express");
-const app = express();
-app.use(express.static("public"));
-
-app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/public/index.html");
-});
-
-
-app.listen(3000,() => {
-    console.log("im listening");
-});
-
 const showBooks = async() => {
     const booksJSON = await getBooks();
     const bookDiv = document.getElementById("book-container");
@@ -55,7 +42,7 @@ const showBooks = async() => {
 }
 const getBooks = async() => {
     try {
-        return (await fetch("http://localhost:3000/api/books")).json();
+        return (await fetch("https://csce242-assignments.onrender.com")).json();
     } catch (error) {
         console.log("error retrieving json");
         return "";

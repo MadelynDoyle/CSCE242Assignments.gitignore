@@ -1,12 +1,12 @@
 const express = require("express");
-const app = express();
-app.use(express.static("public"));
+const server = express();
+server.use(express.static("public"));
 
-app.get("/", (req, res) => {
+server.get("/", (req, res) => {
     res.sendFile(__dirname + "/public/index.html");
 });
 
-app.get("/api/books", (req, res) => {
+server.get("/api/books", (req, res) => {
     const books = [];
     books[0] = {
         title: "Heir Of Fire",
@@ -52,6 +52,6 @@ app.get("/api/books", (req, res) => {
     res.json(books);
 });
 
-app.listen(3000, () => {
+server.listen(3000, () => {
     console.log("listening");
 });
