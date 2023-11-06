@@ -7,6 +7,7 @@ const showBooks = async() => {
         return;
     }
     booksJSON.forEach((book) => {
+        const bookDiv = document.getElementById('book-container');
         const section = document.createElement("section");
         bookDiv.append(section);
 
